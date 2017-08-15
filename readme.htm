@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+	<title>AuthorizeNetRecurring.cfc</title>
+	<style type="text/css" media="screen">
+		body
+		{
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			color: #000;
+			background-color: #ddd;
+		}
+		
+		#container
+		{
+			margin: 0;
+			background-color: #FFF;
+			background-image:  url(images/background.jpg);
+			background-repeat: repeat-y;
+		}
+		
+		#banner
+		{
+			background-color: #666;
+			border-bottom: 1px solid #333;
+		}
+		
+		#banner h1
+		{
+			margin: 0;
+			padding: .5em;
+		}
+		
+		#nav
+		{
+			float: left;
+			width: 160px;
+			margin-left: 10px;
+			padding-top: 1em;
+		}
+		
+		#nav p { margin-top: 0; }
+		
+		#content
+		{
+			padding-top: 1em;
+			margin: 0 2em 0 200px;
+		}
+		
+		#content h2 { margin-top: 0; }
+		
+		#footer
+		{
+			clear: both;
+			background-color: #666;
+			padding: 1em;
+			text-align: center;
+			border-top: 1px solid #333;
+		}
+</style>
+</head>
+<body>
+<div id="container">
+	<div id="banner">
+		<h1>AuthorizeNetRecurring.cfc</h1>
+	</div>
+	<div id="nav">
+		<p>
+		An interface to Authorize.NET's Recurring Billing API</p>
+		<p>
+		</p>
+	</div>
+	<div id="content">
+		<h2>
+			Summary
+		</h2>
+		<p>
+
+Use this CFC to easily create, update, cancel recurring billing subscriptions at Authorize.Net.			
+		</p>
+		<h2>
+			Requires
+		</h2>
+		<p>
+
+		<ul>
+		<li>ColdFusion MX+</li>
+		<li>Authorize.Net account with recurring billing option</li>
+		<li>Merchant account that supports Authorize.Net</li>
+		</ul>
+
+		</p>
+		
+				<h2>
+			Usage
+		</h2>
+		<p>
+
+		Since these methods take so many arguments, I typically use the &lt;cfinvoke&gt;
+		tag, rather than using cfscript syntax.  Take a look at the 
+		<a href="introspect.htm">introspection output</a> to see all the
+		possible attributes and what the defaults are.
+		</p>
+		
+	<p>
+	Each method returns a structure containing the following keys:
+	
+	<table border cellpadding="3">
+	<tr>
+	<td><b>Key</b></td>
+	<td><b>Description</b></td>
+	</tr>
+	<tr>
+	<td>error</td>
+	<td>true or false. This is set internally based on what was returned from
+	Authorize.net.  Use this to see if the transaction was processed or not.</td>
+	</tr>
+	<tr>
+	<td>messagecode</td>
+	<td>Alpha-numeric code returned from Authorize.net.</td>
+	</tr>
+	<tr>
+	<td>messagetext</td>
+	<td>Message text returned from Authorize.net. Usually fairly
+	descriptive.  i.e. "The subscription cannot be found."</td>
+	</tr>
+	<tr>
+	<td>resultcode</td>
+	<td>Usually something like "ok" or "error".</td>
+	</tr>
+	<tr>
+	<td>returnedXml</td>
+	<td>The actual XML returned from Authorize.Net. Useful for debugging or
+	detailed logging.</td>
+	</tr>
+	
+	</table>
+	</p>
+		
+		<p>
+		First, initalize the object, passing in your Authorize.net loginname and transaction key.  Also
+		you need to pass in the "mode", which can be either "live" or "test".  The default is "test"
+		if no mode is specified.  When in test mode, calls are made to Authorize.Net's test server.
+		<pre>
+			
+&lt;cfset PaymentGateway = CreateObject("component","AuthorizeNetRecurring").init(
+	loginname = "YourLoginName"",
+	transactionKey = "YourTransactionKey",
+	mode = "test")&gt;
+		</pre>
+		</p>
+		
+		<p>
+Then call your desired method.  Looking through Authorize.Net's documentation
+on their recurring billing API will help you better see what attributes
+are required for each type of transaction (create, update and cancel).
+
+<pre>
+&lt;cfinvoke component="#PaymentGateway#" method="createSubscription" returnvariable="result"&gt;
+	&lt;!--- to allow for a 1 month trial, set startDate to be 1 month from today.
+	If ommitted, the default value is today ---&gt;
+	&lt;cfinvokeargument name="startDate" value="#DateFormat(DateAdd("m",1,Now()),"yyyy-mm-dd")#"&gt;
+	&lt;cfinvokeargument name="customerEmail" value="#Session.signup.email#"&gt;
+	&lt;cfinvokeargument name="billFirstName" value="#Form.ccfname#"&gt;
+	&lt;cfinvokeargument name="billLastName" value="#Form.cclname#"&gt;
+	&lt;cfinvokeargument name="billAddress" value="#Form.ccAddress#"&gt;
+	&lt;cfinvokeargument name="billCity" value="#Form.ccCity#"&gt;
+	&lt;cfinvokeargument name="billState" value="#Form.ccstate#"&gt;
+	&lt;cfinvokeargument name="billZip" value="#Form.cczip#"&gt;
+	&lt;cfinvokeargument name="shipFirstName" value="#Session.signup.FirstName#"&gt;
+	&lt;cfinvokeargument name="shipLastName" value="#Session.signup.LastName#"&gt;
+	&lt;cfinvokeargument name="shipAddress" value="#tmpAddress#"&gt;
+	&lt;cfinvokeargument name="shipCity" value="#Session.signup.City#"&gt;
+	&lt;cfinvokeargument name="shipState" value="#Session.signup.State#"&gt;
+	&lt;cfinvokeargument name="shipZip" value="#Session.signup.Zip#"&gt;
+
+	&lt;cfinvokeargument name="amount" value="#cfg_RetailPrice#"&gt;
+	&lt;cfinvokeargument name="subscriptionName" value="Monthly Subscription"&gt;
+	&lt;cfinvokeargument name="orderDescription" value="#tmpSignupCode#"&gt;
+	&lt;cfinvokeargument name="totalOccurrences" value="36"&gt;
+	&lt;cfinvokeargument name="cardNumber" value="#Form.ccnum#"&gt;
+	&lt;cfinvokeargument name="expirationDate" value="#Form.ccexpyr#-#Form.ccexpmo#"&gt;
+	
+	&lt;--- first year is at lower rate ---&gt;
+	&lt;cfinvokeargument name="trialAmount" value="#cfg_12moPrice#"&gt;
+	&lt;cfinvokeargument name="trialOccurrences" value="12"&gt;
+&lt;/cfinvoke&gt;
+		</pre>
+		</p>
+		
+		
+		<p>
+When updating, the only required attribute is the subcriptionId.  Pass in whatever
+else you'd like to modify.  There are rules about modifying payment terms after
+the first charge has been made, see the Authorize.Net documentation for details.
+
+<pre>
+&lt;cfinvoke component="#PaymentGateway#" method="updateSubscription" returnvariable="result"&gt;
+	&lt;cfinvokeargument name="subscriptionId" value="234322"&gt;
+	&lt;cfinvokeargument name="customerEmail" value="Bob123@hotmail.com"&gt;
+	&lt;cfinvokeargument name="shipFirstName" value="Robbert"&gt;
+&lt;/cfinvoke&gt;
+</pre>
+		</p>
+		
+		<p>
+To cancel, just pass in the subscriptionId.
+<pre>
+&lt;cfinvoke component="#PaymentGateway#" method="cancelSubscription" returnvariable="result"&gt;
+	&lt;cfinvokeargument name="subscriptionId" value="234322"&gt;
+&lt;/cfinvoke&gt;
+</pre>
+</p>
+
+<p>
+This code is fairly young, so if you encounter any issues please let me know about
+it and I'll see what I can do.
+</p>
+		
+	</div>
+	<div id="footer">
+		Thanks to my employer <a href="http://www.cfwebtools.com">CF WebTools</a> for
+		allowing me to publish this code.
+	</div>
+</div>
+</body>
+</html>

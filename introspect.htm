@@ -1,0 +1,1602 @@
+<html>
+<head>
+<title>Component AuthorizeNetRecurring</title>
+<style>
+body  {
+	font-family: verdana, arial, helvetica, sans-serif;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+table	{
+	font-size: 11px;
+	font-family: Verdana, arial, helvetica, sans-serif;
+	width: 90%;
+}
+
+th {
+	padding: 6px;
+	font-size: 12px;
+	background-color: #cccccc;
+}
+
+td {
+	padding: 6px;
+	background-color: #eeeeee;
+	vertical-align : top;
+}
+
+code {
+	color: #000099 ;
+}
+</style>
+
+</head>
+<body style="padding-bottom : 800px;">
+
+
+<a style="font-size: 1.5em;" href="JavaScript:history.go(-1);">&lt;&lt; Back</a>
+<br /><br />
+
+
+
+
+<font size="-2">AuthorizeNetRecurring.AuthorizeNetRecurring</font><br>
+<font size="+1"><b>Component AuthorizeNetRecurring
+(AuthorizeNetRecurring.cfc)
+</b></font>
+
+
+
+
+
+<br><br><br>
+<table>
+
+
+
+
+<p>Provides Authorize.net recurring billing functionality</p>
+
+<tr><td>properties:</td>
+	
+	
+	<br>
+	<td></td>
+</tr>
+<tr><td>methods:</td>
+	
+	<td>  <a href="#method_init">init</a>, <a href="#method_createSubscription">createSubscription</a>, <a href="#method_updateSubscription">updateSubscription</a>, <a href="#method_cancelSubscription">cancelSubscription</a></td>
+</tr>
+
+
+
+
+
+</table>
+<font size="-2">* - private method</font>
+
+
+
+
+
+
+
+
+
+
+
+<br><br><table>
+
+
+	
+	
+	
+	
+		<tr><th align="left" colspan="1">
+		<a name="method_init">init</a>
+		
+		</th></tr>
+	<tr><td>
+	
+	
+	
+	<code>
+	
+		<i>public</i>
+	
+	
+		<i>AuthorizeNetRecurring</i>
+	
+	<b>init</b>
+	
+	(
+ 	
+		
+		<i>
+		required
+		string
+		</i>
+		loginname,
+	
+		
+		<i>
+		required
+		string
+		</i>
+		transactionKey,
+	
+		
+		<i>
+		
+		string
+		</i>
+		mode="test"
+		
+	)
+	</i>
+	</code>
+	<br><br>	
+	
+	
+	
+	
+	Output: enabled<br>
+	
+	
+	
+		Parameters:<br>
+		
+			
+			&nbsp;&nbsp; <b>loginname:</b>
+			string,
+			required,
+			loginname
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>transactionKey:</b>
+			string,
+			required,
+			transactionKey
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>mode:</b>
+			string,
+			optional,
+			mode
+			
+			<br>
+		
+	
+	
+	<br>
+	</td></tr>
+
+
+	
+	
+
+
+
+	
+	
+	<tr><th align="left" colspan="1">
+		<a name="method_createSubscription">createSubscription</a>
+		(Creates a recurring subscription)
+		</th></tr>
+	<tr><td>
+	
+	
+	
+	<code>
+	
+		<i>public</i>
+	
+	
+	<b>createSubscription</b>
+	
+	(
+ 	
+		
+		<i>
+		
+		date
+		</i>
+		startDate="[runtime expression]",
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		paymentIntervalLength="1",
+	
+		
+		<i>
+		
+		string
+		</i>
+		paymentIntervalUnit="months",
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		totalOccurrences="36",
+	
+		
+		<i>
+		required
+		numeric
+		</i>
+		amount,
+	
+		
+		<i>
+		required
+		string
+		</i>
+		billFirstName,
+	
+		
+		<i>
+		required
+		string
+		</i>
+		billLastName,
+	
+		
+		<i>
+		
+		string
+		</i>
+		chargetype="cc",
+	
+		
+		<i>
+		
+		string
+		</i>
+		refID,
+	
+		
+		<i>
+		
+		string
+		</i>
+		subscriptionName,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		trialOccurrences,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		trialAmount,
+	
+		
+		<i>
+		
+		string
+		</i>
+		cardNumber,
+	
+		
+		<i>
+		
+		string
+		</i>
+		expirationDate,
+	
+		
+		<i>
+		
+		string
+		</i>
+		accountType,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		routingNumber,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		accountNumber,
+	
+		
+		<i>
+		
+		string
+		</i>
+		nameOnAccount,
+	
+		
+		<i>
+		
+		string
+		</i>
+		bankName,
+	
+		
+		<i>
+		
+		string
+		</i>
+		echeckType,
+	
+		
+		<i>
+		
+		string
+		</i>
+		invoiceNumber,
+	
+		
+		<i>
+		
+		string
+		</i>
+		orderDescription,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerType,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerId,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerEmail,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerPhone,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerFax,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billCompany,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billAddress,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billCity,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billState,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billZip,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billCountry,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipFirstName,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipLastName,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipCompany,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipAddress,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipCity,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipState,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipZip,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipCountry
+		
+	)
+	</i>
+	</code>
+	<br><br>	
+	
+	
+	
+	
+	Output: enabled<br>
+	
+	
+	
+		Parameters:<br>
+		
+			
+			&nbsp;&nbsp; <b>startDate:</b>
+			date,
+			optional,
+			startDate
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>paymentIntervalLength:</b>
+			numeric,
+			optional,
+			paymentIntervalLength
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>paymentIntervalUnit:</b>
+			string,
+			optional,
+			paymentIntervalUnit
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>totalOccurrences:</b>
+			numeric,
+			optional,
+			totalOccurrences
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>amount:</b>
+			numeric,
+			required,
+			amount
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billFirstName:</b>
+			string,
+			required,
+			billFirstName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billLastName:</b>
+			string,
+			required,
+			billLastName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>chargetype:</b>
+			string,
+			optional,
+			chargetype
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>refID:</b>
+			string,
+			optional,
+			refID
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>subscriptionName:</b>
+			string,
+			optional,
+			subscriptionName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>trialOccurrences:</b>
+			numeric,
+			optional,
+			trialOccurrences
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>trialAmount:</b>
+			numeric,
+			optional,
+			trialAmount
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>cardNumber:</b>
+			string,
+			optional,
+			cardNumber
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>expirationDate:</b>
+			string,
+			optional,
+			expirationDate
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>accountType:</b>
+			string,
+			optional,
+			accountType
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>routingNumber:</b>
+			numeric,
+			optional,
+			routingNumber
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>accountNumber:</b>
+			numeric,
+			optional,
+			accountNumber
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>nameOnAccount:</b>
+			string,
+			optional,
+			nameOnAccount
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>bankName:</b>
+			string,
+			optional,
+			bankName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>echeckType:</b>
+			string,
+			optional,
+			echeckType
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>invoiceNumber:</b>
+			string,
+			optional,
+			invoiceNumber
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>orderDescription:</b>
+			string,
+			optional,
+			orderDescription
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerType:</b>
+			string,
+			optional,
+			customerType
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerId:</b>
+			string,
+			optional,
+			customerId
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerEmail:</b>
+			string,
+			optional,
+			customerEmail
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerPhone:</b>
+			string,
+			optional,
+			customerPhone
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerFax:</b>
+			string,
+			optional,
+			customerFax
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billCompany:</b>
+			string,
+			optional,
+			billCompany
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billAddress:</b>
+			string,
+			optional,
+			billAddress
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billCity:</b>
+			string,
+			optional,
+			billCity
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billState:</b>
+			string,
+			optional,
+			billState
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billZip:</b>
+			string,
+			optional,
+			billZip
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billCountry:</b>
+			string,
+			optional,
+			billCountry
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipFirstName:</b>
+			string,
+			optional,
+			shipFirstName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipLastName:</b>
+			string,
+			optional,
+			shipLastName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipCompany:</b>
+			string,
+			optional,
+			shipCompany
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipAddress:</b>
+			string,
+			optional,
+			shipAddress
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipCity:</b>
+			string,
+			optional,
+			shipCity
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipState:</b>
+			string,
+			optional,
+			shipState
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipZip:</b>
+			string,
+			optional,
+			shipZip
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipCountry:</b>
+			string,
+			optional,
+			shipCountry
+			
+			<br>
+		
+	
+	
+	<br>
+	</td></tr>
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<tr><th align="left" colspan="1">
+		<a name="method_updateSubscription">updateSubscription</a>
+		(Updates an existing recurring subscription)
+		</th></tr>
+	<tr><td>
+	
+	
+	
+	<code>
+	
+		<i>public</i>
+	
+	
+	<b>updateSubscription</b>
+	
+	(
+ 	
+		
+		<i>
+		required
+		numeric
+		</i>
+		subscriptionId,
+	
+		
+		<i>
+		
+		date
+		</i>
+		startDate,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		paymentIntervalLength,
+	
+		
+		<i>
+		
+		string
+		</i>
+		paymentIntervalUnit,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		totalOccurrences,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		amount,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billFirstName,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billLastName,
+	
+		
+		<i>
+		
+		string
+		</i>
+		chargetype="",
+	
+		
+		<i>
+		
+		string
+		</i>
+		refID,
+	
+		
+		<i>
+		
+		string
+		</i>
+		subscriptionName,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		trialOccurrences,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		trialAmount,
+	
+		
+		<i>
+		
+		string
+		</i>
+		cardNumber,
+	
+		
+		<i>
+		
+		string
+		</i>
+		expirationDate,
+	
+		
+		<i>
+		
+		string
+		</i>
+		accountType,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		routingNumber,
+	
+		
+		<i>
+		
+		numeric
+		</i>
+		accountNumber,
+	
+		
+		<i>
+		
+		string
+		</i>
+		nameOnAccount,
+	
+		
+		<i>
+		
+		string
+		</i>
+		bankName,
+	
+		
+		<i>
+		
+		string
+		</i>
+		echeckType,
+	
+		
+		<i>
+		
+		string
+		</i>
+		invoiceNumber,
+	
+		
+		<i>
+		
+		string
+		</i>
+		orderDescription,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerType,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerId,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerEmail,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerPhone,
+	
+		
+		<i>
+		
+		string
+		</i>
+		customerFax,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billCompany,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billAddress,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billCity,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billState,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billZip,
+	
+		
+		<i>
+		
+		string
+		</i>
+		billCountry,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipFirstName,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipLastName,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipCompany,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipAddress,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipCity,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipState,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipZip,
+	
+		
+		<i>
+		
+		string
+		</i>
+		shipCountry
+		
+	)
+	</i>
+	</code>
+	<br><br>	
+	
+	
+	
+	
+	Output: enabled<br>
+	
+	
+	
+		Parameters:<br>
+		
+			
+			&nbsp;&nbsp; <b>subscriptionId:</b>
+			numeric,
+			required,
+			subscriptionId
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>startDate:</b>
+			date,
+			optional,
+			startDate
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>paymentIntervalLength:</b>
+			numeric,
+			optional,
+			paymentIntervalLength
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>paymentIntervalUnit:</b>
+			string,
+			optional,
+			paymentIntervalUnit
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>totalOccurrences:</b>
+			numeric,
+			optional,
+			totalOccurrences
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>amount:</b>
+			numeric,
+			optional,
+			amount
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billFirstName:</b>
+			string,
+			optional,
+			billFirstName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billLastName:</b>
+			string,
+			optional,
+			billLastName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>chargetype:</b>
+			string,
+			optional,
+			chargetype
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>refID:</b>
+			string,
+			optional,
+			refID
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>subscriptionName:</b>
+			string,
+			optional,
+			subscriptionName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>trialOccurrences:</b>
+			numeric,
+			optional,
+			trialOccurrences
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>trialAmount:</b>
+			numeric,
+			optional,
+			trialAmount
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>cardNumber:</b>
+			string,
+			optional,
+			cardNumber
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>expirationDate:</b>
+			string,
+			optional,
+			expirationDate
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>accountType:</b>
+			string,
+			optional,
+			accountType
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>routingNumber:</b>
+			numeric,
+			optional,
+			routingNumber
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>accountNumber:</b>
+			numeric,
+			optional,
+			accountNumber
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>nameOnAccount:</b>
+			string,
+			optional,
+			nameOnAccount
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>bankName:</b>
+			string,
+			optional,
+			bankName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>echeckType:</b>
+			string,
+			optional,
+			echeckType
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>invoiceNumber:</b>
+			string,
+			optional,
+			invoiceNumber
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>orderDescription:</b>
+			string,
+			optional,
+			orderDescription
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerType:</b>
+			string,
+			optional,
+			customerType
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerId:</b>
+			string,
+			optional,
+			customerId
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerEmail:</b>
+			string,
+			optional,
+			customerEmail
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerPhone:</b>
+			string,
+			optional,
+			customerPhone
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>customerFax:</b>
+			string,
+			optional,
+			customerFax
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billCompany:</b>
+			string,
+			optional,
+			billCompany
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billAddress:</b>
+			string,
+			optional,
+			billAddress
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billCity:</b>
+			string,
+			optional,
+			billCity
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billState:</b>
+			string,
+			optional,
+			billState
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billZip:</b>
+			string,
+			optional,
+			billZip
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>billCountry:</b>
+			string,
+			optional,
+			billCountry
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipFirstName:</b>
+			string,
+			optional,
+			shipFirstName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipLastName:</b>
+			string,
+			optional,
+			shipLastName
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipCompany:</b>
+			string,
+			optional,
+			shipCompany
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipAddress:</b>
+			string,
+			optional,
+			shipAddress
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipCity:</b>
+			string,
+			optional,
+			shipCity
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipState:</b>
+			string,
+			optional,
+			shipState
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipZip:</b>
+			string,
+			optional,
+			shipZip
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>shipCountry:</b>
+			string,
+			optional,
+			shipCountry
+			
+			<br>
+		
+	
+	
+	<br>
+	</td></tr>
+
+		
+	<tr><th align="left" colspan="1">
+		<a name="method_cancelSubscription">cancelSubscription</a>
+		(Cancels a recurring subscription)
+		</th></tr>
+	<tr><td>
+	
+	
+	
+	<code>
+	
+		<i>public</i>
+	
+	
+	<b>cancelSubscription</b>
+	
+	(
+ 	
+		
+		<i>
+		required
+		numeric
+		</i>
+		subscriptionId,
+	
+		
+		<i>
+		
+		string
+		</i>
+		refID
+		
+	)
+	</i>
+	</code>
+	<br><br>	
+	
+	
+	
+	
+	Output: enabled<br>
+	
+	
+	
+		Parameters:<br>
+		
+			
+			&nbsp;&nbsp; <b>subscriptionId:</b>
+			numeric,
+			required,
+			subscriptionId
+			
+			<br>
+		
+			
+			&nbsp;&nbsp; <b>refID:</b>
+			string,
+			optional,
+			refID
+			
+			<br>
+		
+	
+	
+	<br>
+	</td></tr>
+
+
+	
+</table>
+
+
+
+</body></html>
+
+
+		
+
+		
+		
+	
